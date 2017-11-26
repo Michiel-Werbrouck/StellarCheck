@@ -1,0 +1,9 @@
+C:\Users\michi\source\repos\StellarCheck\StellarCheck\bin\Debug\StellarCheck.exe.config
+C:\Users\michi\source\repos\StellarCheck\StellarCheck\bin\Debug\StellarCheck.exe
+C:\Users\michi\source\repos\StellarCheck\StellarCheck\bin\Debug\StellarCheck.pdb
+C:\Users\michi\source\repos\StellarCheck\StellarCheck\obj\Debug\StellarCheck.csprojResolveAssemblyReference.cache
+C:\Users\michi\source\repos\StellarCheck\StellarCheck\obj\Debug\StellarCheck.csproj.CoreCompileInputs.cache
+C:\Users\michi\source\repos\StellarCheck\StellarCheck\obj\Debug\StellarCheck.exe
+C:\Users\michi\source\repos\StellarCheck\StellarCheck\obj\Debug\StellarCheck.pdb
+C:\Users\michi\source\repos\StellarCheck\StellarCheck\bin\Debug\DotNetZip.dll
+C:\Users\michi\source\repos\StellarCheck\StellarCheck\bin\Debug\DotNetZip.xml
