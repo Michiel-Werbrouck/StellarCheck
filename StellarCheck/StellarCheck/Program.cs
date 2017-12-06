@@ -14,77 +14,81 @@ namespace StellarCheck
     class Program
     {
 
-        int errors = 0;
+        static int errors = 0;
 
         static void Main(string[] args) 
         {
+
             Console.Title = "StellarCheck by MikeWe";
             Console.WriteLine("Press any key to start...");
             Console.ReadKey();
-            int inCompatibilities = 0;
-            int possibleInCompatibilities = 0;
-            Program prgm = new Program();
-            List<String> mods = prgm.GetDirectoryNames(@"C:\Program Files (x86)\Steam\steamapps\workshop\content\281990");     
+            Console.Clear();    
+            List<String> mods = GetDirectoryNames(@"C:\Program Files (x86)\Steam\steamapps\workshop\content\281990");
+
+            if (mods == null && Properties.Settings.Default.customPath == string.Empty)
+            {            
+                Console.WriteLine("Stellaris Mod Directory Not Found...");
+                Console.Write("Please enter the path were all your mods are stored:");
+                string path = Console.ReadLine();
+                Properties.Settings.Default.customPath = path;
+                Properties.Settings.Default.Save();
+                mods = GetDirectoryNames(path);
+            }
+            else if (mods == null)
+            {
+                mods = GetDirectoryNames(Properties.Settings.Default.customPath);
+            }
+            
             Console.WriteLine("Searching for valid files...");
             List<String> files = new List<String>();
            
             foreach (var mod in mods)
-            {
-              
-                files.Add(prgm.GetFileName(mod));
-        
+            {            
+                files.Add(GetFileName(mod));    
             }
 
             Console.WriteLine("Searching for incompatibilities...");
             List<String> zippedData = new List<String>();
-            
+            int inCompatibilities = 0;
+            int duplicates = 0;
 
             Console.ForegroundColor = ConsoleColor.Red;
-
-
 
             foreach (var zipPath in files)
             {
                 try
                 {
                     var zip = ZipFile.Read(zipPath);
-                   
-
+                    
                     foreach (ZipEntry e in zip.Entries)
                     {
-                        //string eed = e.FileName.Substring(e.FileName.LastIndexOf("/"));
-
-                        if (zippedData.Contains(e.FileName) && e.FileName.Contains("00_"))
-                        {
+                        if (zippedData.Contains(e.FileName) && e.FileName.Contains(".txt") && e.FileName.Contains("00_"))
+                        {                        
                             Console.WriteLine(zipPath);
                             Console.WriteLine("({0})", e.FileName);
                             inCompatibilities += 1;
                         }
-                        else if (zippedData.Contains(e.FileName)) possibleInCompatibilities += 1;
-
+                        else if (zippedData.Contains(e.FileName)) duplicates += 1;
+                        
                         zippedData.Add(e.FileName);
-
-
                     }
                 }
                 catch
                 {
-                    prgm.errors += 1;
-                }
-               
+                    errors += 1;
+                }            
             }
 
             Console.ResetColor();
-
             Console.WriteLine("{0} Incompatibilities found", inCompatibilities);
-            Console.WriteLine("{0} Duplicate files found", possibleInCompatibilities);
-            Console.WriteLine("{0} Errors (For Debug)", prgm.errors);
+            Console.WriteLine("{0} Duplicate files found", duplicates + inCompatibilities);
+            Console.WriteLine("{0} Errors (For Debug)", errors);
             Console.WriteLine("Press any key to exit...");
             Console.ReadKey();
 
         }
 
-        List<String> GetDirectoryNames(string path)
+        static List<String> GetDirectoryNames(string path)
         {
 
             try
@@ -108,7 +112,7 @@ namespace StellarCheck
             }
         }
 
-        String GetFileName(string path)
+        static String GetFileName(string path)
         {
             try
             {

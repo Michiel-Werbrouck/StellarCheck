@@ -6,3 +6,4 @@ C:\Users\michi\source\repos\StellarCheck\StellarCheck\bin\Release\DotNetZip.xml
 C:\Users\michi\source\repos\StellarCheck\StellarCheck\obj\Release\StellarCheck.csproj.CoreCompileInputs.cache
 C:\Users\michi\source\repos\StellarCheck\StellarCheck\obj\Release\StellarCheck.exe
 C:\Users\michi\source\repos\StellarCheck\StellarCheck\obj\Release\StellarCheck.pdb
+C:\Users\michi\source\repos\StellarCheck\StellarCheck\obj\Release\StellarCheck.csprojResolveAssemblyReference.cache
